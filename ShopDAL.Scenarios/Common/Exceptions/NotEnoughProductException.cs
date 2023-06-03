@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ShopDAL.Scenarios.Common.Exceptions
 {
-    public class AbsenceException : Exception
+    public class NotEnoughProductException : Exception
     {
-        public AbsenceException(string name, object key)
-            : base($"Entity \"{name}\" ({key}) is ended") { }
+        public NotEnoughProductException(string name, object key)
+            : base($"Not enough \"{name}\" ({key}) at store") { }
         
     }
 }

@@ -32,7 +32,7 @@ namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.UpdateProduct
                 {
                     var temprodInStore = entity.ProductsInStore.Find(x => x.ProductId == product.ProductId) ?? throw new NotFoundException(nameof(ProductsInStore), product.ProductId);
                     temprodInStore.Count += product.ProductCount;
-                    if(temprodInStore.Count < 0) throw new AbsenceException(nameof(Product), product.ProductId);
+                    if(temprodInStore.Count < 0) throw new NotEnoughProductException(nameof(Product), product.ProductId);
                 }
                 catch (NotFoundException ex)
                 {

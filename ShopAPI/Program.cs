@@ -1,3 +1,4 @@
+using ShopAPI.Middleware;
 using ShopAPI.Services;
 using ShopDAL;
 using ShopDAL.Models;
@@ -68,6 +69,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseCustomExceptionHandler();
         app.UseRouting();
         app.UseHttpsRedirection();
         app.UseCors("AllowAll");
