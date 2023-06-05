@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAPI.Models;
 using ShopDAL.Scenarios.Notes.Commands.ProductCommands.CreateProduct;
@@ -10,12 +11,24 @@ using ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductList;
 
 namespace ShopAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersionNeutral]
+    [Authorize]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class CustomerController : BaseController
     {
         private readonly IMapper _mapper;
         public CustomerController(IMapper mapper) => _mapper = mapper;
 
+        /// <summary>
+        /// Gets the list of customers
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /customer
+        /// </remarks>
+        /// <returns>Returns CustomerListVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
         public async Task<ActionResult<CustomerListVm>> GetAll()
         {
@@ -24,6 +37,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the customer by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /customer/id
+        /// </remarks>
+        /// <param name="id">customer id</param>
+        /// <returns>Returns CustomerDetailsVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerDetailsVm>> Get(int id)
         {
@@ -35,6 +59,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the list of customers with name like searchstring
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /customer/like/di
+        /// </remarks>
+        /// <param name="searchString">Part of customer's name (string)</param>
+        /// <returns>CustomerLikeVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
         public async Task<ActionResult<CustomerLikeVm>> Get(string searchString)
         {
@@ -46,6 +81,20 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Creates the customer
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// POST /customer
+        /// {
+        ///     Name: "customer name"
+        /// }
+        /// </remarks>
+        /// <param name="createCustomerDto">CreateCustomerDto object</param>
+        /// <returns>Returns id (int)</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody] CreateCustomerDto createCustomerDto)
         {
@@ -59,6 +108,20 @@ namespace ShopAPI.Controllers
             return Ok(productId);
         }
 
+        /// <summary>
+        /// Updates the customer
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// PUT /customer
+        /// {
+        ///     Name: "customer name"
+        /// }
+        /// </remarks>
+        /// /// <param name="updateCustomerDto">UpdateCustomerDto object</param>
+        /// <returns>Returns No Content</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateCustomerDto updateCustomerDto)
         {
@@ -72,6 +135,17 @@ namespace ShopAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Deletes the customer by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// DELETE /customer/id
+        /// </remarks>
+        /// /// <param name="id">Id of the customer</param>
+        /// <returns>Returns No Content</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

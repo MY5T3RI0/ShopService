@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAPI.Models;
 using ShopDAL.Scenarios.Notes.Commands.ProductCommands.CreateProduct;
@@ -12,12 +13,24 @@ using ShopDAL.Scenarios.Notes.Queries.PriceChangeQueries.GetPriceChangeRelatedLi
 
 namespace ShopAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersionNeutral]
+    [Authorize]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class PriceChangeController : BaseController
     {
         private readonly IMapper _mapper;
         public PriceChangeController(IMapper mapper) => _mapper = mapper;
 
+        /// <summary>
+        /// Gets the list of priceChanges
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /priceChange
+        /// </remarks>
+        /// <returns>Returns PriceChangeListVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
         public async Task<ActionResult<PriceChangeListVm>> GetAll()
         {
@@ -26,6 +39,16 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the related list of priceChanges
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /priceChange/related
+        /// </remarks>
+        /// <returns>Returns PriceChangeRelatedListVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related")]
         public async Task<ActionResult<PriceChangeRelatedListVm>> GetAllRelated()
         {
@@ -34,6 +57,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the related priceChange by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /priceChange/related/id
+        /// </remarks>
+        /// <param name="id">priceChange id</param>
+        /// <returns>Returns PriceChangeRelatedDetailsVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related/{id}")]
         public async Task<ActionResult<PriceChangeRelatedDetailsVm>> GetAllRelated(int id)
         {
@@ -45,6 +79,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the priceChange by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /priceChange/id
+        /// </remarks>
+        /// <param name="id">priceChange id</param>
+        /// <returns>Returns PriceChangeDetailsVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<PriceChangeDetailsVm>> Get(int id)
         {
@@ -56,6 +101,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the list of priceChanges with name like searchstring
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /priceChange/like/23
+        /// </remarks>
+        /// <param name="searchString">Part of priceChange's date (string)</param>
+        /// <returns>PriceChangeLikeVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
         public async Task<ActionResult<PriceChangeLikeVm>> Get(string searchString)
         {
@@ -67,6 +123,25 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Creates the priceChange
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// POST /priceChange
+        /// {
+        ///     "changeDetailsDto": [
+        ///         {
+        ///             "productId": 1,
+        ///             "newPrice": 10
+        ///         }
+        ///     ]
+        /// }
+        /// </remarks>
+        /// <param name="createPriceChangeDto">CreatePriceChangeDto object</param>
+        /// <returns>Returns id (int)</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody] CreatePriceChangeDto createPriceChangeDto)
         {
@@ -88,6 +163,27 @@ namespace ShopAPI.Controllers
             return Ok(entityId);
         }
 
+        /// <summary>
+        /// Updates the priceChange by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// PUT /priceChange
+        /// {
+        ///     "id": 1,
+        ///     "date": "2023-06-04",
+        ///     "changeDetailsDto": [
+        ///         {
+        ///             "productId": 1,
+        ///             "newPrice": 10
+        ///         }
+        ///     ]
+        /// }
+        /// </remarks>
+        /// /// <param name="updatePriceChangeDto">UpdatePriceChangeDto object</param>
+        /// <returns>Returns id (int)</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdatePriceChangeDto updatePriceChangeDto)
         {
@@ -109,6 +205,17 @@ namespace ShopAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Deletes the priceChange by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// DELETE /priceChange/id
+        /// </remarks>
+        /// /// <param name="id">Id of the priceChange</param>
+        /// <returns>Returns No Content</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

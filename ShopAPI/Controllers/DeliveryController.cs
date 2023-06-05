@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAPI.Models;
 using ShopDAL.Models;
@@ -12,12 +13,24 @@ using ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductRelatedList;
 
 namespace ShopAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersionNeutral]
+    [Authorize]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class DeliveryController : BaseController
     {
         private readonly IMapper _mapper;
         public DeliveryController(IMapper mapper) => _mapper = mapper;
 
+        /// <summary>
+        /// Gets the list of deliveries
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /delivery
+        /// </remarks>
+        /// <returns>Returns DeliveryListVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
         public async Task<ActionResult<DeliveryListVm>> GetAll()
         {
@@ -26,6 +39,16 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the related list of deliveries
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /delivery/related
+        /// </remarks>
+        /// <returns>Returns DeliveryRelatedListVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related")]
         public async Task<ActionResult<DeliveryRelatedListVm>> GetAllRelated()
         {
@@ -34,6 +57,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the related delivery by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /delivery/related/id
+        /// </remarks>
+        /// <param name="id">delivery id</param>
+        /// <returns>Returns DeliveryRelatedDetailsVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related/{id}")]
         public async Task<ActionResult<DeliveryRelatedDetailsVm>> GetAllRelated(int id)
         {
@@ -45,6 +79,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the delivery by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /delivery/id
+        /// </remarks>
+        /// <param name="id">delivery id</param>
+        /// <returns>Returns DeliveryDetailsVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
         public async Task<ActionResult<DeliveryDetailsVm>> Get(int id)
         {
@@ -56,6 +101,17 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the list of deliveries with name like searchstring
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /delivery/like/di
+        /// </remarks>
+        /// <param name="searchString">Part of delivery's date (string)</param>
+        /// <returns>DeliveryLikeVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
         public async Task<ActionResult<DeliveryLikeVm>> Get(string searchString)
         {
@@ -67,6 +123,26 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Creates the delivery
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// POST /delivery
+        /// {
+        ///     "storeId": 1,
+        ///     "deliveryInfoDto": [
+        ///         {
+        ///             "productId": 1,
+        ///             "productCount": 10
+        ///         }
+        ///     ]
+        /// }
+        /// </remarks>
+        /// <param name="createDeliveryDto">CreateDeliveryDto object</param>
+        /// <returns>Returns id (int)</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody] CreateDeliveryDto createDeliveryDto)
         {
@@ -142,6 +218,17 @@ namespace ShopAPI.Controllers
         //    return NoContent();
         //}
 
+        /// <summary>
+        /// Deletes the delivery by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// DELETE /delivery/id
+        /// </remarks>
+        /// /// <param name="id">Id of the delivery</param>
+        /// <returns>Returns No Content</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

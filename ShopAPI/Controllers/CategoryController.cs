@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopAPI.Models;
 using ShopDAL.Scenarios.Notes.Commands.ProductCommands.CreateProduct;
@@ -10,12 +11,27 @@ using ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductList;
 
 namespace ShopAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersionNeutral]
+    [Authorize]
+    [Produces("application/json")]
+    [Route("api/{version:apiVersion}/[controller]")]
     public class CategoryController : BaseController
     {
         private readonly IMapper _mapper;
         public CategoryController(IMapper mapper) => _mapper = mapper;
 
+        /// <summary>
+        /// Gets the list of categories
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /category
+        /// </remarks>
+        /// <returns>CategoryListVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
         public async Task<ActionResult<CategoryListVm>> GetAll()
         {
@@ -24,6 +40,19 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the category by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /category/1
+        /// </remarks>
+        /// <param name="id">Id of the category</param>
+        /// <returns>CategoryDetailsVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryDetailsVm>> Get(int id)
         {
@@ -35,6 +64,19 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Gets the list of categories with name like searchstring
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// GET /category/like/di
+        /// </remarks>
+        /// <param name="searchString">Part of category's name (string)</param>
+        /// <returns>CategoryLikeVm</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("Like/{searchString}")]
         public async Task<ActionResult<CategoryLikeVm>> Get(string searchString)
         {
@@ -46,6 +88,20 @@ namespace ShopAPI.Controllers
             return Ok(vm);
         }
 
+        /// <summary>
+        /// Creates the category
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// POST /category
+        /// {
+        ///     Name: "category name"
+        /// }
+        /// </remarks>
+        /// <param name="createCategoryDto">CreateCategoryDto object</param>
+        /// <returns>Returns id (int)</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody] CreateCategoryDto createCategoryDto)
         {
@@ -59,6 +115,20 @@ namespace ShopAPI.Controllers
             return Ok(productId);
         }
 
+        /// <summary>
+        /// Updates the category
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// PUT /category
+        /// {
+        ///     Name: "category name"
+        /// }
+        /// </remarks>
+        /// <param name="updateCategoryDto">UpdateCategoryDto object</param>
+        /// <returns>Returns No Content</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateCategoryDto updateCategoryDto)
         {
@@ -72,6 +142,17 @@ namespace ShopAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Deletes the category by id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// DELETE /category/id
+        /// </remarks>
+        /// <param name="id">Id of the category</param>
+        /// <returns>Returns No Content</returns>
+        /// <response code="200">Success</response>
+        /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
