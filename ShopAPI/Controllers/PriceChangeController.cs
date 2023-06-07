@@ -32,7 +32,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
-        public async Task<ActionResult<PriceChangeListVm>> GetAll()
+        public async Task<ActionResult<PriceChangeListVm>> GetAllPriceChange()
         {
             var query = new GetPriceChangeListQuery();
             var vm = await Mediator.Send(query);
@@ -50,7 +50,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related")]
-        public async Task<ActionResult<PriceChangeRelatedListVm>> GetAllRelated()
+        public async Task<ActionResult<PriceChangeRelatedListVm>> GetAllRelatedPriceChange()
         {
             var query = new GetPriceChangeRelatedListQuery();
             var vm = await Mediator.Send(query);
@@ -69,7 +69,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related/{id}")]
-        public async Task<ActionResult<PriceChangeRelatedDetailsVm>> GetAllRelated(int id)
+        public async Task<ActionResult<PriceChangeRelatedDetailsVm>> GetRelatedPriceChange(int id)
         {
             var query = new GetPriceChangeRelatedDetailsQuery
             {
@@ -91,7 +91,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
-        public async Task<ActionResult<PriceChangeDetailsVm>> Get(int id)
+        public async Task<ActionResult<PriceChangeDetailsVm>> GetPriceChange(int id)
         {
             var query = new GetPriceChangeDetailsQuery
             {
@@ -113,7 +113,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
-        public async Task<ActionResult<PriceChangeLikeVm>> Get(string searchString)
+        public async Task<ActionResult<PriceChangeLikeVm>> GetPriceChangeLike(string searchString)
         {
             var query = new GetPriceChangeLikeQuery
             {
@@ -143,7 +143,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreatePriceChangeDto createPriceChangeDto)
+        public async Task<ActionResult<int>> CreatePriceChange([FromBody] CreatePriceChangeDto createPriceChangeDto)
         {
             if (createPriceChangeDto is null)
             {
@@ -185,7 +185,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdatePriceChangeDto updatePriceChangeDto)
+        public async Task<IActionResult> UpdatePriceChange([FromBody] UpdatePriceChangeDto updatePriceChangeDto)
         {
             if (updatePriceChangeDto is null)
             {
@@ -217,7 +217,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeletePriceChange(int id)
         {
             var command = new DeletePriceChangeCommand
             {

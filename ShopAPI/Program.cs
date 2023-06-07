@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using ShopAPI;
@@ -88,6 +87,8 @@ public class Program
         });
 
         builder.Services.AddApiVersioning();
+
+        //builder.Services.AddOpenApiDocument();
 
         var app = builder.Build();
         var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();

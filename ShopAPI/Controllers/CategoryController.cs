@@ -33,7 +33,7 @@ namespace ShopAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
-        public async Task<ActionResult<CategoryListVm>> GetAll()
+        public async Task<ActionResult<CategoryListVm>> GetAllCategory()
         {
             var query = new GetCategoryListQuery();
             var vm = await Mediator.Send(query);
@@ -54,7 +54,7 @@ namespace ShopAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryDetailsVm>> Get(int id)
+        public async Task<ActionResult<CategoryDetailsVm>> GetCategory(int id)
         {
             var query = new GetCategoryDetailsQuery
             {
@@ -78,7 +78,7 @@ namespace ShopAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("Like/{searchString}")]
-        public async Task<ActionResult<CategoryLikeVm>> Get(string searchString)
+        public async Task<ActionResult<CategoryLikeVm>> GetCategoryLike(string searchString)
         {
             var query = new GetCategoryLikeQuery
             {
@@ -103,7 +103,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateCategoryDto createCategoryDto)
+        public async Task<ActionResult<int>> CreateCategory([FromBody] CreateCategoryDto createCategoryDto)
         {
             if (createCategoryDto is null)
             {
@@ -130,7 +130,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateCategoryDto updateCategoryDto)
+        public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryDto updateCategoryDto)
         {
             if (updateCategoryDto is null)
             {
@@ -154,7 +154,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
             var command = new DeleteCategoryCommand
             {

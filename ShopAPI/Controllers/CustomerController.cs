@@ -30,7 +30,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
-        public async Task<ActionResult<CustomerListVm>> GetAll()
+        public async Task<ActionResult<CustomerListVm>> GetAllCustomer()
         {
             var query = new GetCustomerListQuery();
             var vm = await Mediator.Send(query);
@@ -49,7 +49,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerDetailsVm>> Get(int id)
+        public async Task<ActionResult<CustomerDetailsVm>> GetCustomer(int id)
         {
             var query = new GetCustomerDetailsQuery
             {
@@ -71,7 +71,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
-        public async Task<ActionResult<CustomerLikeVm>> Get(string searchString)
+        public async Task<ActionResult<CustomerLikeVm>> GetCustomerLike(string searchString)
         {
             var query = new GetCustomerLikeQuery
             {
@@ -96,7 +96,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateCustomerDto createCustomerDto)
+        public async Task<ActionResult<int>> CreateCustomer([FromBody] CreateCustomerDto createCustomerDto)
         {
             if (createCustomerDto is null)
             {
@@ -123,7 +123,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateCustomerDto updateCustomerDto)
+        public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerDto updateCustomerDto)
         {
             if (updateCustomerDto is null)
             {
@@ -147,7 +147,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
             var command = new DeleteCustomerCommand
             {

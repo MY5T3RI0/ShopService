@@ -32,7 +32,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
-        public async Task<ActionResult<StoreListVm>> GetAll()
+        public async Task<ActionResult<StoreListVm>> GetAllStore()
         {
             var query = new GetStoreListQuery();
             var vm = await Mediator.Send(query);
@@ -50,7 +50,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related")]
-        public async Task<ActionResult<StoreRelatedListVm>> GetAllRelated()
+        public async Task<ActionResult<StoreRelatedListVm>> GetAllRelatedStore()
         {
             var query = new GetStoreRelatedListQuery();
             var vm = await Mediator.Send(query);
@@ -69,7 +69,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related/{id}")]
-        public async Task<ActionResult<StoreRelatedDetailsVm>> GetAllRelated(int id)
+        public async Task<ActionResult<StoreRelatedDetailsVm>> GetRelatedStore(int id)
         {
             var query = new GetStoreRelatedDetailsQuery
             {
@@ -91,7 +91,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
-        public async Task<ActionResult<StoreDetailsVm>> Get(int id)
+        public async Task<ActionResult<StoreDetailsVm>> GetStore(int id)
         {
             var query = new GetStoreDetailsQuery
             {
@@ -113,7 +113,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
-        public async Task<ActionResult<StoreLikeVm>> Get(string searchString)
+        public async Task<ActionResult<StoreLikeVm>> GetStoreLike(string searchString)
         {
             var query = new GetStoreLikeQuery
             {
@@ -138,7 +138,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateStoreDto createStoreDto)
+        public async Task<ActionResult<int>> CreateStore([FromBody] CreateStoreDto createStoreDto)
         {
             if (createStoreDto is null)
             {
@@ -166,7 +166,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateStoreDto updateStoreDto)
+        public async Task<IActionResult> UpdateStore([FromBody] UpdateStoreDto updateStoreDto)
         {
             if (updateStoreDto is null)
             {
@@ -190,7 +190,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteStore(int id)
         {
             var command = new DeleteStoreCommand
             {

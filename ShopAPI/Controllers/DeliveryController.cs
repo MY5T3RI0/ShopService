@@ -32,7 +32,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
-        public async Task<ActionResult<DeliveryListVm>> GetAll()
+        public async Task<ActionResult<DeliveryListVm>> GetAllDelivery()
         {
             var query = new GetDeliveriesListQuery();
             var vm = await Mediator.Send(query);
@@ -50,7 +50,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related")]
-        public async Task<ActionResult<DeliveryRelatedListVm>> GetAllRelated()
+        public async Task<ActionResult<DeliveryRelatedListVm>> GetAllRelatedDelivery()
         {
             var query = new GetDeliveryRelatedListQuery();
             var vm = await Mediator.Send(query);
@@ -69,7 +69,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Related/{id}")]
-        public async Task<ActionResult<DeliveryRelatedDetailsVm>> GetAllRelated(int id)
+        public async Task<ActionResult<DeliveryRelatedDetailsVm>> GetRelatedDelivery(int id)
         {
             var query = new GetDeliveryRelatedDetailsQuery
             {
@@ -91,7 +91,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
-        public async Task<ActionResult<DeliveryDetailsVm>> Get(int id)
+        public async Task<ActionResult<DeliveryDetailsVm>> GetDelivery(int id)
         {
             var query = new GetDeliveryDetailsQuery
             {
@@ -113,7 +113,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
-        public async Task<ActionResult<DeliveryLikeVm>> Get(string searchString)
+        public async Task<ActionResult<DeliveryLikeVm>> GetDeliveryLike(string searchString)
         {
             var query = new GetDeliveryLikeQuery
             {
@@ -144,7 +144,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateDeliveryDto createDeliveryDto)
+        public async Task<ActionResult<int>> CreateDelivery([FromBody] CreateDeliveryDto createDeliveryDto)
         {
             if (createDeliveryDto is null)
             {
@@ -230,7 +230,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteDelivery(int id)
         {
             var command = new DeleteDeliveryCommand
             {

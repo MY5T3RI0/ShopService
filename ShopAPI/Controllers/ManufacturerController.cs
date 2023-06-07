@@ -30,7 +30,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet]
-        public async Task<ActionResult<ManufacturerListVm>> GetAll()
+        public async Task<ActionResult<ManufacturerListVm>> GetAllManufacturer()
         {
             var query = new GetManufacturerListQuery();
             var vm = await Mediator.Send(query);
@@ -49,7 +49,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("{id}")]
-        public async Task<ActionResult<ManufacturerDetailsVm>> Get(int id)
+        public async Task<ActionResult<ManufacturerDetailsVm>> GetManufacturer(int id)
         {
             var query = new GetManufacturerDetailsQuery
             {
@@ -71,7 +71,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpGet("Like/{searchString}")]
-        public async Task<ActionResult<ManufacturerLikeVm>> Get(string searchString)
+        public async Task<ActionResult<ManufacturerLikeVm>> GetManufacturerLike(string searchString)
         {
             var query = new GetManufacturerLikeQuery
             {
@@ -96,7 +96,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateManufacturerDto createManufacturerDto)
+        public async Task<ActionResult<int>> CreateManufacturer([FromBody] CreateManufacturerDto createManufacturerDto)
         {
             if (createManufacturerDto is null)
             {
@@ -123,7 +123,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateManufacturerDto updateManufacturerDto)
+        public async Task<IActionResult> UpdateManufacturer([FromBody] UpdateManufacturerDto updateManufacturerDto)
         {
             if (updateManufacturerDto is null)
             {
@@ -147,7 +147,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteManufacturer(int id)
         {
             var command = new DeleteManufacturerCommand
             {

@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShopApi.Client\ShopApi.Client.csproj" />
     <ProjectReference Include="..\ShopLibrary.Models\ShopDAL.Models.csproj" />
     <ProjectReference Include="..\ShopLibrary\ShopDAL.csproj" />
   </ItemGroup>
