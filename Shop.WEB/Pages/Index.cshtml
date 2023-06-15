@@ -1,24 +1,43 @@
 ﻿@page
-@model IndexModel
+@model Shop.WEB.Pages.HomeModel
 @{
-    ViewData["Title"] = "Home page";
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Welcome to My Shop</h1>
+        <p class="lead">Shop for all your adaptive needs.</p>
+        <a class="btn btn-primary btn-lg" asp-area="" asp-page="/Main/Catalog">Shop Now</a>
+    </div>
 </div>
 
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-    </tr>
-    @foreach(var product in Model.Products)
-    {
-        <tr>
-            <td>@product.Id</td>
-            <td>@product.Name</td>
-        </tr>
-    }
-</table>
+<!-- Featured Products -->
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Featured Products</h2>
+
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    @if (string.IsNullOrWhiteSpace(product.ImageName))
+                    {
+                        <img src="~/Content/img/no_image.png" height="400px" width="400px" class="card-img-top" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" alt="Product image" class="card-img-top" height="400px" width="400px"/>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Price $</p>
+                        <a asp-page="/" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

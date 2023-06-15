@@ -16,6 +16,7 @@ namespace ShopDAL.Models
         [ForeignKey(nameof(CategoryId))]
         public Category? Category { get; set; }
         public decimal Price { get; set; }
+        public string ImageName { get; set; }
         public List<PriceChange> PriceChanges { get; set; }
         public List<ChangesDetails> ChangesDetails { get; set; }
         public Product()

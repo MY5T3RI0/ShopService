@@ -15,7 +15,6 @@ using ShopDAL.Scenarios.Notes.Queries.PurchaseQueries.GetPurchaseRelatedList;
 namespace ShopAPI.Controllers
 {
     [ApiVersionNeutral]
-    [Authorize]
     [Route("api/{version:apiVersion}/[controller]")]
     public class PurchaseController : BaseController
     {

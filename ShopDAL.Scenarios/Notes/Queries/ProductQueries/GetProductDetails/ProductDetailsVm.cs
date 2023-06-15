@@ -11,6 +11,7 @@ namespace ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductDetails
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
         public int ManufacturerId { get; set; }
+        public string ImageName { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -24,6 +25,8 @@ namespace ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductDetails
                 opt => opt.MapFrom(product => product.Name))
                 .ForMember(productVm => productVm.Price,
                 opt => opt.MapFrom(product => product.Price))
+                 .ForMember(productVm => productVm.ImageName,
+                opt => opt.MapFrom(product => product.ImageName))
                 .ForMember(productVm => productVm.Id,
                 opt => opt.MapFrom(product => product.Id))
                 .ForMember(productVm => productVm.CategoryId,

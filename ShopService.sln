@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5E1A3978
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopApi.Client", "ShopApi.Client\ShopApi.Client.csproj", "{0E1C0502-2033-4EFD-A010-D9617737A855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.WEB", "Shop.WEB\Shop.WEB.csproj", "{162D1429-8944-4CA2-8DAD-F28BCF882362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.WEB", "Shop.WEB\Shop.WEB.csproj", "{162D1429-8944-4CA2-8DAD-F28BCF882362}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

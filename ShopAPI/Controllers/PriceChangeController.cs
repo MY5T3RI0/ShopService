@@ -14,7 +14,6 @@ using ShopDAL.Scenarios.Notes.Queries.PriceChangeQueries.GetPriceChangeRelatedLi
 namespace ShopAPI.Controllers
 {
     [ApiVersionNeutral]
-    [Authorize]
     [Route("api/{version:apiVersion}/[controller]")]
     public class PriceChangeController : BaseController
     {

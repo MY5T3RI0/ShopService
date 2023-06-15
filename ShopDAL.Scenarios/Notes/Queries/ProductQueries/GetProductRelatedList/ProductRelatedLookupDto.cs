@@ -9,6 +9,7 @@ namespace ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductRelatedList
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string ImageName { get; set; }
         public decimal Price { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public Category Category { get; set; }
@@ -30,6 +31,8 @@ namespace ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductRelatedList
                 opt => opt.MapFrom(product => product.Manufacturer))
                 .ForMember(productVm => productVm.Category,
                 opt => opt.MapFrom(product => product.Category))
+                .ForMember(productVm => productVm.ImageName,
+                opt => opt.MapFrom(product => product.ImageName))
                 .ForMember(productVm => productVm.Id,
                 opt => opt.MapFrom(product => product.Id));
         }

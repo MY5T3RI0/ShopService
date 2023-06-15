@@ -1,0 +1,27 @@
+﻿@page
+@model Shop.WEB.Pages.ProductsModel
+@{
+}
+
+<div class="container text-center table-borderless border-1 border-dark" style="margin-top:30px; border-style:solid">
+    <div class="row" style="padding-top:10px">
+        <div class="col">Id</div>
+        <div class="col">Name</div>
+        <div class="col">Price</div>
+        <div class="col"></div>
+        <hr/>
+    </div>
+    @foreach(var product in Model.Products)
+    {
+        <div class="row" style="padding-top:10px">
+            <div class="col">@product.Id</div>
+            <div class="col">@product.Name</div>
+            <div class="col">@product.Price</div>
+            <div class="col">
+                <a class="btn btn-info" asp-area="" asp-page="ProductDetails" asp-route-id="@product.Id">Details</a>
+                <a class="btn btn-danger" asp-area="" asp-page="ProductDelete">Delete</a>
+            </div>
+            <hr />
+        </div>
+    }
+</div>

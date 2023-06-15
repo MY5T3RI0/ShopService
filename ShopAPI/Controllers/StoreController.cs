@@ -14,7 +14,6 @@ using ShopDAL.Scenarios.Notes.Queries.StoreQueries.GetStoreRelatedList;
 namespace ShopAPI.Controllers
 {
     [ApiVersionNeutral]
-    [Authorize]
     [Route("api/{version:apiVersion}/[controller]")]
     public class StoreController : BaseController
     {

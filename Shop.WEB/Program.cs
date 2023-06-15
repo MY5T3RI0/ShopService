@@ -16,6 +16,13 @@ builder.Services.AddSingleton<Client>(sp =>
     return new Client(configuration.GetSection("ServiceAddress").Value, clnt);
 });
 
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+    options.LowercaseQueryStrings = true;
+    options.AppendTrailingSlash = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

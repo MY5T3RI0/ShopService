@@ -178,7 +178,7 @@ namespace ShopAPI.Controllers
 
             var command = _mapper.Map<UpdateProductCommand>(updateProductDto);
             await Mediator.Send(command);
-            return NoContent();
+            return Ok();
         }
 
         /// <summary>

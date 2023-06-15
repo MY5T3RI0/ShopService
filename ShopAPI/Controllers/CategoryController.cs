@@ -12,7 +12,6 @@ using ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductList;
 namespace ShopAPI.Controllers
 {
     [ApiVersionNeutral]
-    [Authorize]
     [Produces("application/json")]
     [Route("api/{version:apiVersion}/[controller]")]
     public class CategoryController : BaseController

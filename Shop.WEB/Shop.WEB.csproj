@@ -4,7 +4,17 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageProjectUrl>https://localhost:7216/Main/Home</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Content\img\ajax-loader.gif" />
+    <None Include="wwwroot\Content\img\no_image.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.6" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ShopApi.Client\ShopApi.Client.csproj" />

@@ -1,0 +1,40 @@
+﻿@page
+@model CatalogModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@foreach(var product in Model.Products)
+{
+    <div class="card mb-3" style="margin-top:20px">
+
+        <div class="clearfix row">
+            @if (string.IsNullOrWhiteSpace(product.ImageName))
+            {
+                <img src="~/Content/img/no_image.png" height="400px" width="400px" class="col" />
+            }
+            else
+            {
+                <img src="~/Content/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" alt="Product image" class="col" height="400px" width="400px" />
+            }
+
+            <div class="product-desc col">
+                <p>
+                    A paragraph of placeholder text. We're using it here to show the use of the clearfix class. We're adding quite a few meaningless phrases here to demonstrate how the columns interact here with the floated image.
+                </p>
+                <p>
+                    A paragraph of placeholder text. We're using it here to show the use of the clearfix class. We're adding quite a few meaningless phrases here to demonstrate how the columns interact here with the floated image.
+                </p>
+                <p>
+                    A paragraph of placeholder text. We're using it here to show the use of the clearfix class. We're adding quite a few meaningless phrases here to demonstrate how the columns interact here with the floated image.
+                </p>
+            </div>
+            
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+            <p class="card-text">Price: @product.Price $</p>
+            <div class=" btn btn-info">Details</div>
+        </div>
+    </div>
+}

@@ -1,18 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShopApi.Client;
-using System;
-using System.Collections.Generic;
 
 namespace Shop.WEB.Pages
 {
-    public class HomeModel : PageModel
+    public class ProductsModel : PageModel
     {
-        private readonly ILogger<HomeModel> _logger;
+        private readonly ILogger<ProductsModel> _logger;
         private readonly Client client;
         public ICollection<ProductLookupDto> Products { get; private set; }
 
-        public HomeModel(ILogger<HomeModel> logger, Client client)
+        public ProductsModel(ILogger<ProductsModel> logger, Client client)
         {
             _logger = logger;
             this.client = client;
@@ -22,15 +20,8 @@ namespace Shop.WEB.Pages
         public async Task OnGet()
         {
             var products = await client.GetAllProductAsync("1.0");
-            for (int i = 0; i < 3; i++)
-            {
-                Products = products.Products.OrderBy(x => new Random().Next()).Take(3).ToList();
-            }
-        }
+            Products = products.Products;
 
-        public void OnPostAdminArea()
-        {
-            TempData["Layout"] = "~/Views/Shared/_LayoutAdmin.cshtml";
         }
     }
 }

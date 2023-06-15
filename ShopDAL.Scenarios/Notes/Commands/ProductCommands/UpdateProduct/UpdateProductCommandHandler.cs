@@ -28,6 +28,7 @@ namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.UpdateProduct
             entity.Price = request.Price;
             entity.CategoryId = request.CategoryId;
             entity.ManufacturerId = request.ManufacturerId;
+            entity.ImageName = request.ImageName;
 
             await _service.UpdateAsync(entity);
         }

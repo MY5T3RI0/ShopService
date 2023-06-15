@@ -1,0 +1,69 @@
+﻿@page "{id}"
+@{
+    var imagePath = !string.IsNullOrWhiteSpace(@Model.Product.ImageName) 
+    ? $"Content/Images/Uploads/Products/{@Model.Product.Id}/Thumbs/{@Model.Product.ImageName}"
+    : "Content/img/no_image.png";
+}
+@model Shop.WEB.Pages.Admin.ProductDetailsModel
+
+
+<form method="post" class="row" id="myForm" enctype="multipart/form-data">
+
+    <div class="col-sm-12 col-md-5" style="margin-bottom:20px">
+        <img src="~/@imagePath" height="400px" style="margin-bottom:20px; max-width:526px"/>
+        <input asp-for="Photo" id="photo" name="Photo" class="custom-file-input form-control">
+    </div>
+
+    <div class="card col-sm-12 col-md-5" style="margin-top:30px">
+        <input type="hidden" asp-for="Product.Id" />
+
+        <div class="form-group">
+            <label asp-for="Product.Name"></label>
+            <input asp-for="@Model.Product.Name" class="form-control" placeholder="@Model.Product.Name" />
+            <span asp-validation-for="Product.Name" class="text-danger"></span>
+        </div>
+
+        <div class="card-body">
+            <label asp-for="Product.Price"></label>
+            <input asp-for="Product.Price" class="form-control" placeholder="@Model.Product.Price $" />
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
+            <br />
+            <div class="form-group">
+                <label asp-for="Categories"></label>
+                <select asp-for="Product.CategoryId" asp-items="@Model.Categories" class="form-control categoryControl"></select>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Manufacturers"></label>
+                <select asp-for="Product.ManufacturerId" asp-items="@Model.Manufacturers" class="form-control"></select>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-success">Save</button>
+            <a class="btn btn-danger" asp-area="" asp-page="ProductDelete">Delete</a>
+        </div>
+    </div>
+        
+</form>
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width:84%">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/@imagePath/../@Model.GalleryImages.Last()" class="d-block w-100" alt="..." height="400">
+        </div>
+        @foreach (var source in Model.GalleryImages.SkipLast(1))
+        {
+            <div class="carousel-item">
+                <img src="~/@imagePath/../@source" class="d-block w-100" alt="..." height="400">
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
