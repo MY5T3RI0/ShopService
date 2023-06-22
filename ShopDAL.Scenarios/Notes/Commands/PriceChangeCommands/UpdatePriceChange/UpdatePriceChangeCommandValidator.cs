@@ -4,7 +4,7 @@ using ShopDAL.Models;
 
 namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.UpdateProduct
 {
-    public class UpdatePriceChangeCommandValidator : AbstractValidator<UpdatePriceChangeCommand>, IRequest
+    public class UpdatePriceChangeCommandValidator : AbstractValidator<UpdatePriceChangeCommand>, IRequest<int>
     {
         public UpdatePriceChangeCommandValidator()
         {

@@ -5,14 +5,14 @@ using ShopDAL.Scenarios.Common.Exceptions;
 
 namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.UpdateProduct
 {
-    public class UpdatePriceChangeCommandHandler : IRequestHandler<UpdatePriceChangeCommand>
+    public class UpdatePriceChangeCommandHandler : IRequestHandler<UpdatePriceChangeCommand, int>
     {
         private readonly IRepoService<PriceChange> _service;
 
         public UpdatePriceChangeCommandHandler(IRepoService<PriceChange> service) =>
             _service = service ?? throw new ArgumentNullException(nameof(service));
 
-        public async Task Handle(UpdatePriceChangeCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdatePriceChangeCommand request, CancellationToken cancellationToken)
         {
             if (request is null)
             {
@@ -25,11 +25,18 @@ namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.UpdateProduct
                 throw new NotFoundException(nameof(PriceChange), request.Id);
 
             entity.DateOfChange = request.Date;
-            entity.Id = request.Id;
             entity.ChangesDetails = request.ChangesDetails;
 
+            var newEntity = new PriceChange
+            {
+                DateOfChange = entity.DateOfChange,
+                ChangesDetails = entity.ChangesDetails
+            };
+
             await _service.DeleteAsync(entity);
-            await _service.AddAsync(entity);
+            await _service.AddAsync(newEntity);
+
+            return newEntity.Id;
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿@page
+@model PurchaseCreateModel
+
+
+<form method="post" id="myForm" enctype="multipart/form-data" style="">    
+
+    <div class="row">
+
+        <label class="col">Product</label>
+
+        <label class="col">Product Count</label>
+
+    </div>
+    
+    @for(int i = 0; i < 10; i++)
+    {
+        <div class="row">
+
+            <div class="form-group col row">
+                <select name="purchaseDetails[@i].ProductId" asp-items="@Model.Products" class="form-control col"></select>
+            </div>
+
+            <input type="number" name="purchaseDetails[@i].ProductCount" class="col" value="0">
+
+        </div>
+    }       
+
+    <br/>
+
+    <div class="row">
+
+        <div class="form-group col">
+            <div>Customer</div>
+            <select name="Customer.Id" asp-items="@Model.Customers" class="form-control"></select>
+        </div>
+
+        <button type="submit" class="btn btn-success col">Create Purchase</button>
+
+    </div>
+
+</form>
+
+@if (Model.ValidationErrors is not null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in Model.ValidationErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}

@@ -1,0 +1,51 @@
+﻿@page
+@model CustomerListModel
+ 
+<div class="container text-center table-borderless border-1 border-dark" style="margin-top:30px; border-style:solid">
+    <div class="row" style="padding-top:10px">
+        <div class="col">Id</div>
+        <div class="col">Name</div>
+        <div class="col"></div>
+        <hr/>
+    </div>
+
+    @foreach (var customer in Model.Customers)
+    {
+        <form method="post" class="row" enctype="multipart/form-data">
+
+        <div class="col">@customer.Id</div>
+
+            <input type="number" name="id" value="@customer.Id" class="visually-hidden"/>
+
+            <div class="col">
+
+                <div class="form-group">
+                    <input placeholder="@customer.Name" class="form-control" value="@customer.Name" name="name" />
+                </div>
+
+            </div>
+            
+            <div class="col">
+                <a class="btn btn-danger" asp-area="" asp-page="CustomerDelete" asp-route-id="@customer.Id">Delete</a>
+                <input type="submit" class="btn btn-success" value="Save"/>
+
+            </div>
+
+        </form>
+
+        <hr style="margin-top:10px" />
+    }
+
+</div>
+
+@if (Model.ValidationErrors is not null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in Model.ValidationErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}

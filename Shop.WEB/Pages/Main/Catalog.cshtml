@@ -9,13 +9,13 @@
     <div class="card mb-3" style="margin-top:20px">
 
         <div class="clearfix row">
-            @if (string.IsNullOrWhiteSpace(product.ImageName))
+            @if (string.IsNullOrWhiteSpace(product.ImageName) || product.ImageName == "no-image.png")
             {
-                <img src="~/Content/img/no_image.png" height="400px" width="400px" class="col" />
+                <img src="~/Content/img/no_image.png" height="400px" style="max-width:526px" class="col" />
             }
             else
             {
-                <img src="~/Content/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" alt="Product image" class="col" height="400px" width="400px" />
+                <img src="~/Content/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" alt="Product image" class="col" height="400px" style="max-width:526px" />
             }
 
             <div class="product-desc col">

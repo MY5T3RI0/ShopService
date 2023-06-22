@@ -1,0 +1,56 @@
+﻿@page
+@model PriceChangeUpdateModel
+
+
+<form method="post" id="myForm" enctype="multipart/form-data">
+
+    <input type="number" asp-for="@Model.PriceChange.Id" class="visually-hidden" value="@Model.PriceChange.Id">
+
+    <div class="form-group">
+        <label asp-for="PriceChange.Date"></label>
+        <input asp-for="@Model.PriceChange.Date" class="form-control" placeholder="@Model.PriceChange.Date" />
+        <span asp-validation-for="PriceChange.Date" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+
+        <label class="col">Product</label>
+
+        <label class="col">Product Price</label>
+
+    </div>
+    @{
+        var i = 0;
+
+        @foreach (var changesDetails in Model.PriceChange.ChangesDetails)
+        {
+            <div class="row">
+
+                <div class="form-group col row">
+                    <select asp-for="@changesDetails.ProductId" name="_changesDetails[@i].ProductId" asp-items="@Model.Products" class="form-control col"></select>
+                </div>
+
+                <input type="decimal" asp-for="@changesDetails.NewPrice" name="_changesDetails[@i].NewPrice" class="col">
+
+            </div>
+
+            i++;
+        }
+    }
+    <br />
+
+    <input type="submit" class="btn btn-success col" value="Save"/>
+
+</form>
+
+@if (Model.ValidationErrors is not null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in Model.ValidationErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}

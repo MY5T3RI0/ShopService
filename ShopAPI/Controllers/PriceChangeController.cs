@@ -184,7 +184,7 @@ namespace ShopAPI.Controllers
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
         [HttpPut]
-        public async Task<IActionResult> UpdatePriceChange([FromBody] UpdatePriceChangeDto updatePriceChangeDto)
+        public async Task<ActionResult<int>> UpdatePriceChange([FromBody] UpdatePriceChangeDto updatePriceChangeDto)
         {
             if (updatePriceChangeDto is null)
             {
@@ -192,7 +192,7 @@ namespace ShopAPI.Controllers
             }
 
             var command = _mapper.Map<UpdatePriceChangeCommand>(updatePriceChangeDto);
-            await Mediator.Send(command);
+            var entityId = await Mediator.Send(command);
 
             UpdateProductPriceCommand productCommand;
             foreach (var changeDetails in command.ChangesDetails)
@@ -201,7 +201,7 @@ namespace ShopAPI.Controllers
                 await Mediator.Send(productCommand);
             }
 
-            return NoContent();
+            return Ok(entityId);
         }
 
         /// <summary>

@@ -1,0 +1,41 @@
+﻿@page
+@model PurchaseListModel
+@{
+}
+
+<div class="container text-center table-borderless border-1 border-dark" style="margin-top:30px; border-style:solid">
+    <div class="row" style="padding-top:10px">
+        <div class="col">Id</div>
+        <div class="col">Date</div>
+        <div class="col">Stores</div>
+        <div class="col">
+            <a class="btn btn-success" asp-area="" asp-page="PurchaseCreate" style="margin:10px">Add new purchase</a>
+        </div>
+        <hr/>
+    </div>
+    @foreach (var purchase in Model.Purchases)
+    {
+        <div class="row" style="padding-top:10px">
+            <div class="col">@purchase.Id</div>
+            <div class="col">@purchase.Date</div>
+            <div class="col">
+                <div class="dropdown" style="padding-bottom:10px">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Stores
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach (var store in purchase.StoreProducts)
+                        {
+                            <li><div class="dropdown-item">@store.StoreId</div></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <a class="btn btn-danger" asp-area="" asp-page="PurchaseDelete" asp-route-id="@purchase.Id">Delete</a>
+                <a class="btn btn-info" asp-area="" asp-page="PurchaseDetails" asp-route-id="@purchase.Id">Details</a>
+            </div>
+            <hr />
+        </div>
+    }
+</div>

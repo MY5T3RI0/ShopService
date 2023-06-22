@@ -1,0 +1,51 @@
+﻿@page
+@model CategoryListModel
+ 
+<div class="container text-center table-borderless border-1 border-dark" style="margin-top:30px; border-style:solid">
+    <div class="row" style="padding-top:10px">
+        <div class="col">Id</div>
+        <div class="col">Name</div>
+        <div class="col"></div>
+        <hr/>
+    </div>
+
+    @foreach(var category in Model.Categories)
+    {
+        <form method="post" class="row" enctype="multipart/form-data">
+
+        <div class="col">@category.Id</div>
+
+            <input type="number" name="id" value="@category.Id" class="visually-hidden"/>
+
+            <div class="col">
+
+                <div class="form-group">
+                    <input placeholder="@category.Name" class="form-control" value="@category.Name" name="name" />
+                </div>
+
+            </div>
+            
+            <div class="col">
+                <a class="btn btn-danger" asp-area="" asp-page="CategoryDelete" asp-route-id="@category.Id">Delete</a>
+                <input type="submit" class="btn btn-success" value="Save"/>
+
+            </div>
+
+        </form>
+
+        <hr style="margin-top:10px" />
+    }
+
+</div>
+
+@if (Model.ValidationErrors is not null)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in Model.ValidationErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}

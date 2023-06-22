@@ -16,7 +16,14 @@
 
 namespace ShopApi.Client
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json.Linq;
+    using ShopApi.Client.Metadata.Product;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.IO;
+    using System.Text.Json;
+    using static System.Runtime.InteropServices.JavaScript.JSType;
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
@@ -350,11 +357,16 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
+                        
                     }
                     finally
                     {
@@ -555,6 +567,10 @@ namespace ShopApi.Client
                         {
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
+                        }
+                        else if (status_ == 204)
+                        {
+                            return;
                         }
                         else
                         {
@@ -976,6 +992,10 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -1177,6 +1197,10 @@ namespace ShopApi.Client
                         {
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
+                        }
+                        else if (status_ == 204)
+                        {
+                            return;
                         }
                         else
                         {
@@ -1906,6 +1930,10 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2107,6 +2135,15 @@ namespace ShopApi.Client
                         {
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
+                        }
+                        if (status_ == 204)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ManufacturerListVm>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -2322,6 +2359,10 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2523,6 +2564,10 @@ namespace ShopApi.Client
                         {
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
+                        }
+                        else if (status_ == 204)
+                        {
+                            return;
                         }
                         else
                         {
@@ -2846,6 +2891,21 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 400)
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                            var errors = JsonSerializer.Deserialize<JsonElement[]>(responseData_);
+
+                            string errorMessage = "";
+
+                            foreach (var error in errors)
+                            {
+                                errorMessage += error.GetProperty("ErrorMessage").ToString();
+                            }
+
+                            throw new Exception(errorMessage);
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2871,7 +2931,7 @@ namespace ShopApi.Client
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// <br/>PUT /priceChange
+        /// <br/>PUT /priceChangeUpdatePriceChangeAsync
         /// <br/>{
         /// <br/>    "id": 1,
         /// <br/>    "date": "2023-06-04",
@@ -2886,7 +2946,7 @@ namespace ShopApi.Client
         /// <param name="body">UpdatePriceChangeDto object</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task UpdatePriceChangeAsync(string version, UpdatePriceChangeDto body)
+        public virtual System.Threading.Tasks.Task<int> UpdatePriceChangeAsync(string version, UpdatePriceChangeDto body)
         {
             return UpdatePriceChangeAsync(version, body, System.Threading.CancellationToken.None);
         }
@@ -2912,7 +2972,7 @@ namespace ShopApi.Client
         /// <param name="body">UpdatePriceChangeDto object</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task UpdatePriceChangeAsync(string version, UpdatePriceChangeDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> UpdatePriceChangeAsync(string version, UpdatePriceChangeDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (version == null)
                 throw new System.ArgumentNullException("version");
@@ -2956,13 +3016,29 @@ namespace ShopApi.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
                         {
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
+                        }
+                        else if (status_ == 400)
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                            var errors = JsonSerializer.Deserialize<JsonElement[]>(responseData_);
+
+                            string errorMessage = "";
+
+                            foreach (var error in errors)
+                            {
+                                errorMessage += error.GetProperty("ErrorMessage").ToString();
+                            }
+
+                            throw new Exception(errorMessage);
                         }
                         else
                         {
@@ -3368,6 +3444,10 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3686,6 +3766,21 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if(status_ == 400)
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                            var errors = JsonSerializer.Deserialize<JsonElement[]>(responseData_);
+
+                            string errorMessage = "";
+
+                            foreach (var error in errors)
+                            {
+                                errorMessage += error.GetProperty("ErrorMessage").ToString();
+                            }
+
+                            throw new Exception(errorMessage);
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -3794,7 +3889,22 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
-                        if(status_ == 204)
+                        else if (status_ == 400)
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                            var errors = JsonSerializer.Deserialize<JsonElement[]>(responseData_);
+
+                            string errorMessage = "";
+
+                            foreach (var error in errors)
+                            {
+                                errorMessage += error.GetProperty("ErrorMessage").ToString();
+                            }
+
+                            throw new Exception(errorMessage);
+                        }
+                        if (status_ == 204)
                         {
 
                         }
@@ -4201,6 +4311,10 @@ namespace ShopApi.Client
                         {
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
+                        }
+                        else if (status_ == 204)
+                        {
+                            return;
                         }
                         else
                         {
@@ -5042,6 +5156,10 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -5460,6 +5578,10 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -5864,6 +5986,10 @@ namespace ShopApi.Client
                             string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("If the user is unauthorized", status_, responseText_, headers_, null);
                         }
+                        else if (status_ == 204)
+                        {
+                            return;
+                        }
                         else
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -6223,6 +6349,8 @@ namespace ShopApi.Client
         [Newtonsoft.Json.JsonProperty("manufacturerId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ManufacturerId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("imageName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ImageName { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
@@ -7213,6 +7341,8 @@ namespace ShopApi.Client
             Result = result;
         }
     }
+
+    
 
 }
 

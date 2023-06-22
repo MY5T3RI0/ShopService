@@ -1,0 +1,68 @@
+﻿@page
+@{
+    var imagePath = !string.IsNullOrWhiteSpace(@Model.Product.ImageName) && @Model.Product.ImageName != "no-image.png"
+    ? $"Content/Images/Uploads/Products/{@Model.Product.Name}/Thumbs/{@Model.Product.ImageName}"
+    : "Content/img/no_image.png";
+}
+@model ProductCreateModel
+
+
+<form method="post" class="row" id="myForm" enctype="multipart/form-data">
+
+    <div class="col-sm-12 col-md-5" style="margin-bottom:20px">
+        <img src="~/@imagePath" height="400px" style="margin-bottom:20px; max-width:526px"/>
+        <input asp-for="Photo" class="custom-file-input form-control">
+    </div>
+
+    <div class="card col-sm-12 col-md-5" style="margin-top:30px">
+
+        <div class="form-group">
+            <label asp-for="Product.Name"></label>
+            <input asp-for="Product.Name" class="form-control" />
+            <span asp-validation-for="Product.Name" class="text-danger"></span>
+        </div>
+
+        <div class="card-body">
+            <label asp-for="Product.Price"></label>
+            <input asp-for="Product.Price" class="form-control" />
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
+            <br />
+            <div class="form-group">
+                <label asp-for="Categories"></label>
+                <select asp-for="Product.CategoryId" class="form-control categoryControl">
+                    @foreach(var category in Model.Categories.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Manufacturers"></label>
+                <select asp-for="Product.ManufacturerId"class="form-control">
+                    @foreach (var manufacturer in Model.Manufacturers.Manufacturers)
+                    {
+                        <option value="@manufacturer.Id">@manufacturer.Name</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-success">Save</button>
+            <a class="btn btn-danger" asp-area="" asp-page="ProductDelete">Delete</a>
+        </div>
+    </div>
+        
+</form>
+
+@if (Model.ValidationErrors.Count != 0)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in Model.ValidationErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+

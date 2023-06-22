@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using ShopApi.Client.Metadata.Product;
+using System.ComponentModel.DataAnnotations;
 
 namespace ShopApi.Client
 {
-    public partial class Client
+    [ModelMetadataType(typeof(ProductUpdateMetadata))]
+    public partial class UpdateProductDto
     {
 
     }
+
 }

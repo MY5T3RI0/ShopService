@@ -22,7 +22,13 @@ namespace ShopDAL
 
             services.AddDbContext<ShopContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(
+                connectionString,
+                options => options.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: System.TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null)
+                );
             });
 
             services.AddScoped<IShopContext>(provider =>

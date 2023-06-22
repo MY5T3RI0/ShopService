@@ -22,7 +22,7 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="card">
-                    @if (string.IsNullOrWhiteSpace(product.ImageName))
+                    @if (string.IsNullOrWhiteSpace(product.ImageName) || product.ImageName == "no-image.png")
                     {
                         <img src="~/Content/img/no_image.png" height="400px" width="400px" class="card-img-top" />
                     }

@@ -24,7 +24,8 @@ namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.CreateProduct
                 Name = request.Name,
                 Price = request.Price,
                 PriceChanges = new List<PriceChange>(),
-                ChangesDetails = new List<ChangesDetails>()
+                ChangesDetails = new List<ChangesDetails>(),
+                ImageName = request.ImageName,
             };
 
             await _service.AddAsync(product);

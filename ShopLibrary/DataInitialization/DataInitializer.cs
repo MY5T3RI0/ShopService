@@ -60,56 +60,67 @@ namespace ShopDAL.DataInitialization
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100,10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Trousers",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100,10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Table",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100,10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Radio",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Boots",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Chair",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Gum",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Phone",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Dress",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Dishwasher",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 },
                 new Product {Name = "Paper",
                     Manufacturer = Manufacturers[new Random().Next(0, 4)],
                     Category = Categories[new Random().Next(0, 4)],
                     Price = new Random().Next(100, 10000),
+                    ImageName = "no-image.png"
                 }
             };
 

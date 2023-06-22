@@ -8,6 +8,7 @@ namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.CreateProduct
         public int ManufacturerId { get; set; }
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
+        public string ImageName { get; set; }
 
     }
 }

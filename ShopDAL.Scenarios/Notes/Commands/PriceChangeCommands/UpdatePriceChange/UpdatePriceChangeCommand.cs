@@ -3,7 +3,7 @@ using ShopDAL.Models;
 
 namespace ShopDAL.Scenarios.Notes.Commands.ProductCommands.UpdateProduct
 {
-    public class UpdatePriceChangeCommand : IRequest
+    public class UpdatePriceChangeCommand : IRequest<int>
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }

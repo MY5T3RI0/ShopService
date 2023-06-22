@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using ShopAPI;
 using ShopAPI.Middleware;
 using ShopAPI.Services;
 using ShopDAL;
+using ShopDAL.EF;
 using ShopDAL.Models;
 using ShopDAL.Repos;
 using ShopDAL.Repos.Interfaces;

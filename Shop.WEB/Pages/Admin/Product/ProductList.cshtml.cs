@@ -2,15 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShopApi.Client;
 
-namespace Shop.WEB.Pages
+namespace Shop.WEB.Pages.Admin.Product
 {
-    public class ProductsModel : PageModel
+    public class ProductListModel : PageModel
     {
-        private readonly ILogger<ProductsModel> _logger;
+        private readonly ILogger<ProductListModel> _logger;
         private readonly Client client;
         public ICollection<ProductLookupDto> Products { get; private set; }
 
-        public ProductsModel(ILogger<ProductsModel> logger, Client client)
+        public ProductListModel(ILogger<ProductListModel> logger, Client client)
         {
             _logger = logger;
             this.client = client;

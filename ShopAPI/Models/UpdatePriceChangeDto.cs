@@ -11,7 +11,6 @@ namespace ShopAPI.Models
     {
         public int Id { get; set; }
         public DateOnly Date { get; set; }
-
         public List<ChangesDetailsCreateDto> ChangeDetails { get; set; }
 
         public void Mapping(Profile profile)

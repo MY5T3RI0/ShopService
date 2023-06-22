@@ -1,0 +1,52 @@
+﻿@page
+@model StoreListModel
+@{
+}
+
+<div class="container text-center table-borderless border-1 border-dark" style="margin-top:30px; border-style:solid">
+    <div class="row" style="padding-top:10px">
+        <div class="col">Id</div>
+        <div class="col">Name</div>
+        <div class="col"></div>
+        <hr/>
+    </div>
+    @foreach (var store in Model.Stores)
+    {
+        <form method="post" class="row" enctype="multipart/form-data">
+
+            <div class="col">@store.Id</div>
+
+            <input type="number" name="id" value="@store.Id" class="visually-hidden" />
+
+            <div class="col">
+
+                <div class="form-group">
+                    <input placeholder="@store.Name" class="form-control" value="@store.Name" name="name" />
+                </div>
+
+            </div>
+
+            <div class="col">
+                <a class="btn btn-danger" asp-area="" asp-page="StoreDelete" asp-route-id="@store.Id">Delete</a>
+                <a class="btn btn-info" asp-area="" asp-page="StoreDetails" asp-route-id="@store.Id">Details</a>
+                <input type="submit" class="btn btn-success" value="Save" />
+
+            </div>
+
+        </form>
+
+        <hr style="margin-top:10px" />
+    }
+</div>
+
+@if (Model.ValidationErrors.Count > 0)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in Model.ValidationErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}

@@ -10,6 +10,7 @@ namespace ShopAPI.Models
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
         public int ManufacturerId { get; set; }
+        public string ImageName { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -21,7 +22,9 @@ namespace ShopAPI.Models
             .ForMember(productCommand => productCommand.CategoryId,
                 opt => opt.MapFrom(productDto => productDto.CategoryId))
                 .ForMember(productCommand => productCommand.ManufacturerId,
-                opt => opt.MapFrom(productDto => productDto.ManufacturerId));
+                opt => opt.MapFrom(productDto => productDto.ManufacturerId))
+                .ForMember(productCommand => productCommand.ImageName,
+                opt => opt.MapFrom(productDto => productDto.ImageName));
         }
     }
 }
