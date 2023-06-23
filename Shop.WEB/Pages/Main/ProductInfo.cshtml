@@ -1,0 +1,74 @@
+﻿@page "{id}"
+@{
+    var imagePath = !string.IsNullOrWhiteSpace(@Model.Product.ImageName) && @Model.Product.ImageName != "no-image.png"
+    ? $"Content/Images/Uploads/Products/{@Model.Product.Id}/Thumbs/{@Model.Product.ImageName}"
+    : "Content/img/no_image.png";
+}
+@model ProductInfoModel
+
+
+<form method="post" class="row" id="myForm" enctype="multipart/form-data" style="margin-bottom:30px">
+
+    <div class="col-md-5 block">
+        <img src="~/@imagePath"/>
+    </div>
+
+    <div class="card col-sm-12 col-md-5">
+
+        <h5 class="card-title" id="scrollspyHeading1">Product Info</h5>
+
+        <div class="form-group">
+            <label asp-for="Product.Name"></label>
+            <input asp-for="Product.Name" readonly class="form-control" />
+        </div>
+
+        <div class="card-body">
+            <label asp-for="Product.Price"></label>
+            <input asp-for="Product.Price" readonly class="form-control" />
+            <br />
+            <div class="form-group">
+                <label asp-for="Product.Category"></label>
+                <input asp-for="Product.Category.Name" readonly class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Product.Manufacturer"></label>
+                <input asp-for="Product.Manufacturer.Name" readonly class="form-control" />
+            </div>
+            <br />
+
+            <button type="submit" class="btn btn-primary disabled">Add to cart</button>
+        </div>
+    </div>
+        
+</form>
+
+ @if (!string.IsNullOrWhiteSpace(Model.Product.ImageName) && Model.Product.ImageName != "no-image.png")
+{
+    <h4 id="scrollspyHeading1">Gallery</h4>
+
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="width:84%">
+        <div class="carousel-inner">
+       
+                <div class="carousel-item active">
+                    <img src="~/@imagePath/../@Model.GalleryImages.Last()" class="d-block w-100" alt="..." height="400">
+                </div>
+                @foreach (var source in Model.GalleryImages.SkipLast(1))
+                {
+                <div class="carousel-item carousel">
+                        <img src="~/@imagePath/../@source" class="d-block w-100" alt="..." height="400">
+                    </div>
+                }
+        
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+}
+

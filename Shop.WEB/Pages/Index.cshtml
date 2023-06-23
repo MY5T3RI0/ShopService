@@ -33,7 +33,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
                         <p class="card-text">@product.Price $</p>
-                        <a asp-page="/" class="btn btn-primary">Buy Now</a>
+                        <a asp-page="/Main/ProductInfo" asp-route-id="@product.Id" class="btn btn-primary">Buy Now</a>
                     </div>
                 </div>
             </div>

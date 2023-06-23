@@ -31,12 +31,22 @@ body {
     align-items:center;
 }
 
-.block img{
-    max-width:100%;
-    max-height:100%;
+    .block img {
+        max-width: 100%;
+        max-height: 100%;
+        width: 526px;
+        object-fit: contain;
+        height: 400px;
+        margin-bottom: 10px;
+    }
 
-    width:526px;
-    height:400px;
+.card-img-top {
+    object-fit: contain;
+    height: 400px;
+}
 
-    margin-bottom: 10px;
+.carousel img {
+    object-fit: contain;
+    height: 500px;
+    width:200px;
 }

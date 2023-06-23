@@ -9,6 +9,7 @@ namespace ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductLike
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public string ImageName { get; set; }
         public void Mapping(Profile profile)
         {
             if (profile is null)
@@ -19,6 +20,8 @@ namespace ShopDAL.Scenarios.Notes.Queries.ProductQueries.GetProductLike
             profile.CreateMap<Product, ProductLikeLookupDto>()
                 .ForMember(productVm => productVm.Name,
                 opt => opt.MapFrom(product => product.Name))
+                .ForMember(productVm => productVm.ImageName,
+                opt => opt.MapFrom(product => product.ImageName))
                  .ForMember(productVm => productVm.Price,
                 opt => opt.MapFrom(product => product.Price));
         }
